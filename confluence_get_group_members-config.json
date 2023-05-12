@@ -1,0 +1,5 @@
+{
+    "base_url": "<confluence-url>",
+    "bearer_token": "<personal-access-token-of-admin>",
+    "api_endpoint": "/rest/api/group/"
+}
