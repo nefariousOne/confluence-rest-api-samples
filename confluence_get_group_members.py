@@ -100,7 +100,7 @@ class ConfluenceAPI:
         return full_data
 
 if __name__ == '__main__':
-    with open('config.json') as f:
+    with open('confluence_get_group_members-config.json') as f:
         config = json.load(f)
     
     # instantiate new API class
