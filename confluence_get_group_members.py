@@ -4,6 +4,7 @@
 import requests
 import json
 import logging
+import os
 
 # configure logging
 logging.basicConfig(level=logging.INFO)
@@ -57,8 +58,8 @@ class ConfluenceAPI:
             for result in data['results']:
                 group = result['name']
                 # skip the 'confluence-users' group
-                if group == "confluence-users":
-                    continue
+                #if group == "confluence-users":
+                #    continue
                 logging.info(f"Retrieving members for group {group}")
                 # add the group data to the full_data dictionary
                 full_data['groups'][group] = {'group-data': result, 'users': {}}
@@ -100,7 +101,8 @@ class ConfluenceAPI:
         return full_data
 
 if __name__ == '__main__':
-    with open('confluence_get_group_members-config.json') as f:
+    file_path = os.path.join(os.getcwd(), 'group_user_data.json')
+    with open(os.path.join(os.getcwd(),'confluence_get_group_members-config.json')) as f:
         config = json.load(f)
     
     # instantiate new API class
@@ -110,5 +112,5 @@ if __name__ == '__main__':
     full_data = api.get_groups_and_users()
     
     # write to data object to file
-    with open('group_user_data.json', mode='w+') as f:
+    with open(os.path.join(os.getcwd(), 'group_user_data.json', mode='w+')) as f:
         f.write(json.dumps(full_data))
